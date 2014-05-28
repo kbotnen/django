@@ -7,7 +7,7 @@ from mbpolls.models import Choice, Question
 
 
 class IndexView(generic.ListView):
-    template_name = 'polls/index.html'
+    template_name = 'mbpolls/index.html'
     context_object_name = 'latest_poll_list'
 
     def get_queryset(self):
@@ -16,13 +16,13 @@ class IndexView(generic.ListView):
 
 
 class DetailView(generic.DetailView):
-    model = Poll
-    template_name = 'polls/detail.html'
+    model = Question
+    template_name = 'mbpolls/detail.html'
 
 
 class ResultsView(generic.DetailView):
-    model = Poll
-    template_name = 'polls/results.html'
+    model = Question
+    template_name = 'mbpolls/results.html'
 
 
 def vote(request, question_id):
@@ -31,7 +31,7 @@ def vote(request, question_id):
         selected_choice = p.choice_set.get(pk=request.POST['choice'])
     except (KeyError, Choice.DoesNotExist):
         # Redisplay the question voting form.
-        return render(request, 'polls/detail.html', {
+        return render(request, 'mbpolls/detail.html', {
             'question': p,
             'error_message': "You didn't select a choice.",
         })
@@ -41,4 +41,4 @@ def vote(request, question_id):
         # Always return an HttpResponseRedirect after successfully dealing
         # with POST data. This prevents data from being posted twice if a
         # user hits the Back button.
-        return HttpResponseRedirect(reverse('polls:results', args=(p.id,)))
+        return HttpResponseRedirect(reverse('mbpolls:results', args=(p.id,)))
