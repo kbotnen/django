@@ -8,21 +8,22 @@ from mbpolls.models import Choice, Question
 
 class IndexView(generic.ListView):
     template_name = 'polls/index.html'
-    context_object_name = 'latest_question_list'
+    context_object_name = 'latest_poll_list'
 
     def get_queryset(self):
-        """Return the last five published questions."""
-        return Question.objects.order_by('-pub_date')[:5]
+        """Return the last five published polls."""
+        return Poll.objects.order_by('-pub_date')[:5]
 
 
 class DetailView(generic.DetailView):
-    model = Question
+    model = Poll
     template_name = 'polls/detail.html'
 
 
 class ResultsView(generic.DetailView):
-    model = Question
+    model = Poll
     template_name = 'polls/results.html'
+
 
 def vote(request, question_id):
     p = get_object_or_404(Question, pk=question_id)
