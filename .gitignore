@@ -52,4 +52,5 @@ docs/_build/
 # MB Media stuff
 *.sqlite3
 .*swp
-
+.spyderproject
+deploy_env.sh
